@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argentina · 10 días en Patagonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --paper:#f5f1ea;
+    --paper-warm:#ede6d8;
+    --glacier:#5b8aa6;
+    --glacier-deep:#2d5872;
+    --terracotta:#c66a4a;
+    --sand:#d4b896;
+    --moss:#5c6f4f;
+    --line:rgba(26,26,26,0.12);
+    --muted:rgba(26,26,26,0.6);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+
+  /* Typography */
+  .serif{font-family:'Fraunces',serif;font-optical-sizing:auto}
+
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.02em;line-height:1.1}
+
+  /* Grain texture overlay */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:1000;
+    opacity:0.5;
+  }
+
+  /* Navigation */
+  nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    padding:1.5rem 3rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:100;
+    backdrop-filter:blur(10px);
+    background:rgba(245,241,234,0.7);
+    border-bottom:1px solid var(--line);
+  }
+
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;
+    font-style:italic;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+
+  .logo span{color:var(--terracotta)}
+
+  .nav-links{
+    display:flex;
+    gap:2.5rem;
+    list-style:none;
+  }
+
+  .nav-links a{
+    color:var(--ink);
+    text-decoration:none;
+    font-size:0.85rem;
+    font-weight:500;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    transition:color 0.3s;
+    position:relative;
+  }
+
+  .nav-links a:hover{color:var(--terracotta)}
+
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--terracotta);
+    transition:width 0.3s;
+  }
+
+  .nav-links a:hover::after{width:100%}
+
+  /* Hero */
+  .hero{
+    min-height:100vh;
+    padding:8rem 3rem 4rem;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+    align-items:center;
+    position:relative;
+  }
+
+  .hero-content{position:relative;z-index:2}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:0.75rem;
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    color:var(--muted);
+    margin-bottom:2rem;
+    font-weight:500;
+  }
+
+  .eyebrow::before{
+    content:'';
+    width:30px;
+    height:1px;
+    background:var(--terracotta);
+  }
+
+  .hero h1{
+    font-size:clamp(3rem,7vw,6rem);
+    line-height:0.95;
+    margin-bottom:2rem;
+    font-weight:300;
+  }
+
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--terracotta);
+  }
+
+  .hero-meta{
+    display:flex;
+    gap:2.5rem;
+    margin:2.5rem 0;
+    padding:1.5rem 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+
+  .meta-item{}
+
+  .meta-label{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:var(--muted);
+    margin-bottom:0.3rem;
+    font-weight:600;
+  }
+
+  .meta-value{
+    font-family:'Fraunces',serif;
+    font-size:1.1rem;
+  }
+
+  .hero p{
+    font-size:1.05rem;
+    color:var(--muted);
+    max-width:480px;
+    line-height:1.7;
+  }
+
+  .hero-image{
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    border-radius:2px;
+  }
+
+  .hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:contrast(1.05) saturate(0.9);
+  }
+
+  .image-caption{
+    position:absolute;
+    bottom:1rem;
+    left:1rem;
+    right:1rem;
+    color:white;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.85rem;
+    text-shadow:0 1px 8px rgba(0,0,0,0.5);
+  }
+
+  /* Sections */
+  section{padding:6rem 3rem;position:relative}
+
+  .section-header{
+    margin-bottom:4rem;
+    max-width:700px;
+  }
+
+  .section-number{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.95rem;
+    color:var(--terracotta);
+    margin-bottom:1rem;
+    display:block;
+  }
+
+  .section-header h2{
+    font-size:clamp(2.2rem,4.5vw,3.5rem);
+    margin-bottom:1rem;
+    font-weight:300;
+  }
+
+  .section-header h2 em{
+    font-style:italic;
+    color:var(--terracotta);
+  }
+
+  .section-header p{
+    color:var(--muted);
+    font-size:1.05rem;
+    line-height:1.7;
+  }
+
+  /* Overview / Stats */
+  .overview{
+    background:var(--paper-warm);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+  }
+
+  .stat{
+    padding:2rem 1.5rem;
+    border-right:1px solid var(--line);
+    text-align:center;
+  }
+
+  .stat:last-child{border-right:none}
+
+  .stat-number{
+    font-family:'Fraunces',serif;
+    font-size:3.5rem;
+    line-height:1;
+    color:var(--glacier-deep);
+    margin-bottom:0.5rem;
+    font-weight:300;
+  }
+
+  .stat-label{
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    font-weight:500;
+  }
+
+  /* Timeline */
+  .timeline{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .day{
+    display:grid;
+    grid-template-columns:140px 1fr 280px;
+    gap:3rem;
+    padding:3rem 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+
+  .day:last-child{border-bottom:none}
+
+  .day-marker{
+    position:sticky;
+    top:120px;
+  }
+
+  .day-num{
+    font-family:'Fraunces',serif;
+    font-size:4rem;
+    font-weight:300;
+    line-height:1;
+    color:var(--ink);
+  }
+
+  .day-num em{
+    font-style:italic;
+    color:var(--terracotta);
+    font-size:1.2rem;
+    display:block;
+    margin-top:0.3rem;
+  }
+
+  .day-date{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    margin-top:1rem;
+    font-weight:500;
+  }
+
+  .day-content h3{
+    font-size:2rem;
+    margin-bottom:1rem;
+    font-weight:400;
+  }
+
+  .day-content h3 em{
+    font-style:italic;
+    color:var(--terracotta);
+  }
+
+  .day-content > p{
+    color:var(--muted);
+    margin-bottom:1.5rem;
+    font-size:1rem;
+    line-height:1.75;
+  }
+
+  .activities{
+    list-style:none;
+    margin:1.5rem 0;
+  }
+
+  .activities li{
+    padding:0.6rem 0;
+    border-bottom:1px dashed var(--line);
+    display:flex;
+    align-items:flex-start;
+    gap:1rem;
+    font-size:0.95rem;
+  }
+
+  .activities li:last-child{border-bottom:none}
+
+  .activity-time{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--terracotta);
+    min-width:80px;
+    font-size:0.9rem;
+  }
+
+  .activity-text{flex:1;color:var(--ink)}
+
+  .activity-text strong{font-weight:600}
+
+  .price-tag{
+    display:inline-block;
+    font-size:0.75rem;
+    background:var(--paper-warm);
+    padding:0.15rem 0.5rem;
+    border-radius:2px;
+    margin-left:0.5rem;
+    color:var(--glacier-deep);
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+
+  .day-image{
+    aspect-ratio:4/5;
+    overflow:hidden;
+    border-radius:2px;
+    position:relative;
+  }
+
+  .day-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:contrast(1.05) saturate(0.9);
+    transition:transform 0.6s ease;
+  }
+
+  .day-image:hover img{transform:scale(1.05)}
+
+  /* Tip box */
+  .tip{
+    background:var(--paper-warm);
+    border-left:3px solid var(--terracotta);
+    padding:1.25rem 1.5rem;
+    margin:1.5rem 0;
+    font-size:0.92rem;
+    line-height:1.7;
+  }
+
+  .tip strong{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--terracotta);
+    font-weight:500;
+    display:block;
+    margin-bottom:0.3rem;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  /* Budget */
+  .budget{background:var(--paper-warm)}
+
+  .budget-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .budget-card{
+    background:var(--paper);
+    padding:2.5rem 2rem;
+    border:1px solid var(--line);
+    position:relative;
+    transition:transform 0.3s,box-shadow 0.3s;
+  }
+
+  .budget-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px -20px rgba(0,0,0,0.1);
+  }
+
+  .budget-card.featured{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+
+  .budget-card.featured .budget-detail{color:rgba(245,241,234,0.7)}
+  .budget-card.featured .budget-detail-row{border-color:rgba(245,241,234,0.15)}
+  .budget-card.featured .budget-amount em{color:var(--sand)}
+
+  .budget-tier{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.4rem;
+    margin-bottom:0.5rem;
+  }
+
+  .budget-amount{
+    font-family:'Fraunces',serif;
+    font-size:3rem;
+    line-height:1;
+    margin:1.5rem 0;
+    font-weight:300;
+  }
+
+  .budget-amount em{
+    font-style:normal;
+    color:var(--terracotta);
+    font-size:1rem;
+    display:block;
+    margin-bottom:0.3rem;
+    font-weight:500;
+  }
+
+  .budget-details{margin-top:1.5rem}
+
+  .budget-detail-row{
+    display:flex;
+    justify-content:space-between;
+    padding:0.6rem 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.85rem;
+  }
+
+  .budget-detail-row:last-child{border-bottom:none}
+
+  .budget-detail{color:var(--muted)}
+
+  /* Tips section */
+  .tips-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  .tip-card{
+    padding:2rem 0;
+    border-top:2px solid var(--ink);
+  }
+
+  .tip-card-icon{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--terracotta);
+    margin-bottom:1rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+  }
+
+  .tip-card h4{
+    font-size:1.4rem;
+    margin-bottom:1rem;
+  }
+
+  .tip-card p{
+    color:var(--muted);
+    font-size:0.95rem;
+    line-height:1.7;
+  }
+
+  /* Packing list */
+  .packing{
+    background:var(--ink);
+    color:var(--paper);
+  }
+
+  .packing .section-header h2{color:var(--paper)}
+  .packing .section-header p{color:rgba(245,241,234,0.7)}
+  .packing .section-number{color:var(--sand)}
+
+  .packing-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:3rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .packing-col h4{
+    font-size:1.5rem;
+    margin-bottom:1.5rem;
+    color:var(--paper);
+    border-bottom:1px solid rgba(245,241,234,0.2);
+    padding-bottom:0.75rem;
+  }
+
+  .packing-col h4 em{
+    font-style:italic;
+    color:var(--sand);
+  }
+
+  .packing-list{
+    list-style:none;
+  }
+
+  .packing-list li{
+    padding:0.6rem 0;
+    color:rgba(245,241,234,0.85);
+    font-size:0.95rem;
+    border-bottom:1px solid rgba(245,241,234,0.08);
+    position:relative;
+    padding-left:1.5rem;
+  }
+
+  .packing-list li::before{
+    content:'·';
+    position:absolute;
+    left:0;
+    color:var(--terracotta);
+    font-size:1.5rem;
+    line-height:1;
+    top:0.4rem;
+  }
+
+  /* Footer */
+  footer{
+    padding:5rem 3rem 3rem;
+    background:var(--paper-warm);
+    text-align:center;
+    border-top:1px solid var(--line);
+  }
+
+  footer h3{
+    font-size:2.5rem;
+    font-weight:300;
+    margin-bottom:1rem;
+  }
+
+  footer h3 em{
+    font-style:italic;
+    color:var(--terracotta);
+  }
+
+  footer p{
+    color:var(--muted);
+    max-width:500px;
+    margin:0 auto 2rem;
+  }
+
+  .footer-meta{
+    margin-top:3rem;
+    padding-top:2rem;
+    border-top:1px solid var(--line);
+    font-size:0.8rem;
+    color:var(--muted);
+    letter-spacing:0.05em;
+  }
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .hero{grid-template-columns:1fr;gap:3rem;padding-top:7rem}
+    .hero-image{aspect-ratio:16/10;max-height:500px}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat{border-bottom:1px solid var(--line)}
+    .stat:nth-child(2){border-right:none}
+    .day{grid-template-columns:100px 1fr;gap:2rem}
+    .day-image{grid-column:1/-1;aspect-ratio:16/9;max-height:300px}
+    .budget-grid,.tips-grid,.packing-grid{grid-template-columns:1fr}
+    nav{padding:1rem 1.5rem}
+    .nav-links{gap:1.2rem}
+    .nav-links a{font-size:0.75rem}
+    section{padding:4rem 1.5rem}
+    .hero{padding-left:1.5rem;padding-right:1.5rem}
+  }
+
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .hero h1{font-size:2.8rem}
+    .day{grid-template-columns:1fr}
+    .day-marker{position:static;margin-bottom:1rem}
+    .day-num{font-size:3rem}
+    .hero-meta{flex-direction:column;gap:1rem}
+    .stats-grid{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--line)}
+    footer h3{font-size:1.8rem}
+  }
+
+  /* Animations */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  .hero-content > *{
+    opacity:0;
+    animation:fadeUp 0.8s ease forwards;
+  }
+
+  .hero-content > *:nth-child(1){animation-delay:0.1s}
+  .hero-content > *:nth-child(2){animation-delay:0.2s}
+  .hero-content > *:nth-child(3){animation-delay:0.3s}
+  .hero-content > *:nth-child(4){animation-delay:0.4s}
+
+  .hero-image{
+    opacity:0;
+    animation:fadeUp 1s ease 0.3s forwards;
+  }
+
+  /* Decorative element */
+  .deco-line{
+    width:60px;
+    height:1px;
+    background:var(--terracotta);
+    margin:2rem 0;
+  }
+
+  /* Map dots */
+  .route-marker{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    font-size:0.85rem;
+    color:var(--muted);
+    margin-right:1.5rem;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+  }
+
+  .route-marker::before{
+    content:'';
+    width:6px;
+    height:6px;
+    background:var(--terracotta);
+    border-radius:50%;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Patagonia<span>·</span>26</div>
+  <ul class="nav-links">
+    <li><a href="#overview">Resumen</a></li>
+    <li><a href="#itinerary">Itinerario</a></li>
+    <li><a href="#budget">Presupuesto</a></li>
+    <li><a href="#packing">Equipaje</a></li>
+    <li><a href="#tips">Consejos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Itinerario · Junio 2026</div>
+    <h1>Argentina<br>en <em>diez</em> días<br>de invierno.</h1>
+    <p>Buenos Aires y la Patagonia en su versión más íntima. Glaciares, montañas nevadas, parrillas humeantes y noches de tango. Una guía completa, día por día, con precios reales y recomendaciones de un agente local.</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Duración</div>
+        <div class="meta-value">10 días · 11 noches</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Fechas</div>
+        <div class="meta-value">8 — 18 junio</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Ruta</div>
+        <div class="meta-value">CDMX · BUE · FTE</div>
+      </div>
+    </div>
+    <div>
+      <span class="route-marker">Buenos Aires</span>
+      <span class="route-marker">El Calafate</span>
+      <span class="route-marker">El Chaltén</span>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1531686264889-56fdcabd163f?w=1200&q=80&auto=format&fit=crop&fm=jpg" alt="Cerro Fitz Roy en la Patagonia argentina">
+    <div class="image-caption">Cerro Fitz Roy, El Chaltén</div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Ciudades</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Vuelos internos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">7</div>
+      <div class="stat-label">Glaciares posibles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">-5°</div>
+      <div class="stat-label">Mínima Patagonia</div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="section-header">
+    <span class="section-number">— I.</span>
+    <h2>El viaje, <em>día por día</em>.</h2>
+    <p>Un itinerario pensado para optimizar tiempo y dinero, con flexibilidad para que el clima patagónico no te tome por sorpresa. Los precios están en dólares y verificados para junio 2026.</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- DÍA 1 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">01<em>día</em></div>
+        <div class="day-date">Lun · 8 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>CDMX → <em>Buenos Aires</em></h3>
+        <p>Vuelo nocturno directo (~9h 30min) con Aerolíneas Argentinas o Aeroméxico. Sales de México y amaneces en el río más ancho del mundo.</p>
+        <ul class="activities">
+          <li><span class="activity-time">22:00</span><span class="activity-text">Salida desde <strong>MEX</strong> rumbo a Buenos Aires <span class="price-tag">USD 750–1,200</span></span></li>
+          <li><span class="activity-time">Tip</span><span class="activity-text">Siéntate del lado izquierdo en la ida para ver el amanecer sobre los Andes</span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Vuelo nocturno">
+      </div>
+    </article>
+
+    <!-- DÍA 2 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">02<em>día</em></div>
+        <div class="day-date">Mar · 9 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Llegada a <em>Buenos Aires</em></h3>
+        <p>Aterrizas en Ezeiza, te trasladas a Palermo (la mejor zona para hospedarte) y arrancas con un paseo suave por el Microcentro y Plaza de Mayo. Cena de bienvenida en una parrilla de verdad.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Mañana</span><span class="activity-text">Traslado EZE → Palermo en <strong>Cabify</strong> <span class="price-tag">USD 25–35</span></span></li>
+          <li><span class="activity-time">Tarde</span><span class="activity-text">Plaza de Mayo, Catedral, <strong>Café Tortoni</strong> y Puerto Madero</span></li>
+          <li><span class="activity-time">Noche</span><span class="activity-text">Cena en <strong>La Cabrera</strong> o <strong>Don Julio</strong> <span class="price-tag">USD 40–90</span></span></li>
+        </ul>
+        <div class="tip">
+          <strong>Pro tip de tu agente</strong>
+          No cambies dólares en el aeropuerto. Mejor envíate dinero por <em>Western Union</em> a ti mismo y recógelo en pesos al tipo de cambio favorable. Pagar con tarjeta extranjera también funciona muy bien.
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Buenos Aires arquitectura">
+      </div>
+    </article>
+
+    <!-- DÍA 3 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">03<em>día</em></div>
+        <div class="day-date">Mié · 10 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>San Telmo, La Boca <em>&amp; Tango</em></h3>
+        <p>El día más porteño del viaje. Caminas por el barrio más antiguo, ves las casas de colores de Caminito y cierras la noche con un show de tango en algún teatro centenario.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Mañana</span><span class="activity-text"><strong>Mercado de San Telmo</strong> y Plaza Dorrego</span></li>
+          <li><span class="activity-time">Mediodía</span><span class="activity-text"><strong>Caminito</strong> y Bombonera (solo de día) <span class="price-tag">USD 25 tour estadio</span></span></li>
+          <li><span class="activity-time">Almuerzo</span><span class="activity-text">Bodegón <strong>El Obrero</strong> (reservar) <span class="price-tag">USD 20–30</span></span></li>
+          <li><span class="activity-time">Noche</span><span class="activity-text">Show de tango en <strong>El Querandí</strong> o <strong>Esquina Homero Manzi</strong> <span class="price-tag">USD 27–140</span></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Caminito La Boca">
+      </div>
+    </article>
+
+    <!-- DÍA 4 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">04<em>día</em></div>
+        <div class="day-date">Jue · 11 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Recoleta y <em>Palermo</em></h3>
+        <p>Día de elegancia y arte. Cementerio de la Recoleta, MALBA, librerías hermosas y compras en Palermo Soho. Termina con la mejor cena de tu viaje.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Mañana</span><span class="activity-text"><strong>Cementerio de la Recoleta</strong> + Floralis Genérica <span class="price-tag">USD 6</span></span></li>
+          <li><span class="activity-time">Tarde</span><span class="activity-text"><strong>MALBA</strong> y librería <strong>El Ateneo Grand Splendid</strong> <span class="price-tag">USD 10</span></span></li>
+          <li><span class="activity-time">Noche</span><span class="activity-text">Cena en <strong>Anchoita</strong>, <strong>Proper</strong> o pizza en <strong>Güerrín</strong></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1592861956120-e524fc739696?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Cementerio Recoleta">
+      </div>
+    </article>
+
+    <!-- DÍA 5 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">05<em>día</em></div>
+        <div class="day-date">Vie · 12 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>BUE → <em>El Calafate</em> ❄</h3>
+        <p>Vuelo desde Aeroparque (no Ezeiza) hacia el corazón de la Patagonia austral. 3h 20min de vuelo y aterrizas en otro mundo: estepa infinita, lagos turquesa y aire helado.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Mañana</span><span class="activity-text">Vuelo <strong>AEP → FTE</strong> con Aerolíneas Argentinas <span class="price-tag">USD 180–280 ida y vuelta</span></span></li>
+          <li><span class="activity-time">Tarde</span><span class="activity-text">Check-in en hostel/hotel y paseo por Av. del Libertador</span></li>
+          <li><span class="activity-time">Atardecer</span><span class="activity-text"><strong>Laguna Nimez</strong> y aves patagónicas <span class="price-tag">USD 6</span></span></li>
+          <li><span class="activity-time">Cena</span><span class="activity-text">Cordero patagónico en <strong>La Tablita</strong> o <strong>Pura Vida</strong></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="El Calafate Lago Argentino">
+      </div>
+    </article>
+
+    <!-- DÍA 6 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">06<em>día</em></div>
+        <div class="day-date">Sáb · 13 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Glaciar <em>Perito Moreno</em> 🧊</h3>
+        <p>El día estrella del viaje. 80 km al oeste te espera una pared de hielo de 5 km de ancho y 70 m de altura. La opción del Minitrekking sobre el glaciar es, sin duda, la experiencia más impactante de toda Patagonia.</p>
+        <ul class="activities">
+          <li><span class="activity-time">7:30</span><span class="activity-text">Recogida en hotel · Bus al PN Los Glaciares</span></li>
+          <li><span class="activity-time">Mañana</span><span class="activity-text"><strong>Pasarelas</strong> frente al glaciar (5 niveles) <span class="price-tag">USD 60</span></span></li>
+          <li><span class="activity-time">Día completo</span><span class="activity-text"><strong>Minitrekking</strong> sobre el hielo + brindis con whisky <span class="price-tag">USD 220–270</span></span></li>
+          <li><span class="activity-time">Entrada</span><span class="activity-text">PN Los Glaciares (extranjeros) <span class="price-tag">USD 35</span></span></li>
+        </ul>
+        <div class="tip">
+          <strong>Imprescindible</strong>
+          Compra la entrada al parque online en <em>ventaweb.apn.gob.ar</em> con anticipación. Reserva el Minitrekking con 2–4 semanas antes en hieloyaventura.com. Lleva vianda, agua, capas térmicas y guantes.
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1531176175280-33e81d5d0a39?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Glaciar Perito Moreno">
+      </div>
+    </article>
+
+    <!-- DÍA 7 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">07<em>día</em></div>
+        <div class="day-date">Dom · 14 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Navegación o <em>Estancia</em></h3>
+        <p>Día flexible para profundizar en la zona. Tres caminos posibles según tu energía y presupuesto.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Opción A</span><span class="activity-text">Navegación <strong>Todo Glaciares</strong> (Upsala + Spegazzini) <span class="price-tag">USD 180–230</span></span></li>
+          <li><span class="activity-time">Opción B</span><span class="activity-text">Día en <strong>Estancia Nibepo Aike</strong> con asado y caballos <span class="price-tag">USD 180–250</span></span></li>
+          <li><span class="activity-time">Opción C</span><span class="activity-text">Spa en Imago + tour 4x4 <strong>Cerro Frías</strong> <span class="price-tag">USD 75–95</span></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1610818989429-a39263494fed?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Navegación glaciares Patagonia">
+      </div>
+    </article>
+
+    <!-- DÍA 8 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">08<em>día</em></div>
+        <div class="day-date">Lun · 15 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>El Calafate → <em>El Chaltén</em></h3>
+        <p>Bus matinal de 3 horas por la Ruta 40, costeando el Lago Viedma. El paisaje es de los más bellos de Sudamérica. Llegas al pueblo más joven de Argentina, capital nacional del trekking.</p>
+        <ul class="activities">
+          <li><span class="activity-time">8:00</span><span class="activity-text">Bus <strong>Cal-Tur</strong> o <strong>Chaltén Travel</strong> <span class="price-tag">USD 30–40</span></span></li>
+          <li><span class="activity-time">11:00</span><span class="activity-text">Llegada · Registro en <strong>Intendencia del Parque</strong></span></li>
+          <li><span class="activity-time">Tarde</span><span class="activity-text">Caminata corta a <strong>Mirador de los Cóndores</strong> (2h)</span></li>
+          <li><span class="activity-time">Cena</span><span class="activity-text"><strong>La Cervecería Chaltén</strong> · locro y cerveza artesanal</span></li>
+        </ul>
+        <div class="tip">
+          <strong>Importante</strong>
+          En El Chaltén hay un solo cajero y suele estar sin efectivo. Lleva pesos suficientes desde El Calafate. El internet es limitado: descarga mapas offline antes.
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1483356541166-4cd62b9b8f8b?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="El Chaltén pueblo">
+      </div>
+    </article>
+
+    <!-- DÍA 9 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">09<em>día</em></div>
+        <div class="day-date">Mar · 16 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Trekking al pie del <em>Fitz Roy</em></h3>
+        <p>El día grande de Patagonia. En invierno los senderos largos requieren cuidado, pero la recompensa es ver lagos congelados y montañas blancas en absoluto silencio.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Recomendado</span><span class="activity-text"><strong>Laguna Capri</strong> · 9 km · 4–5h · medio</span></li>
+          <li><span class="activity-time">Avanzado</span><span class="activity-text"><strong>Laguna de los Tres</strong> con guía <span class="price-tag">USD 130 guía</span></span></li>
+          <li><span class="activity-time">Alternativa</span><span class="activity-text"><strong>Lago del Desierto</strong> + Glaciar Huemul <span class="price-tag">USD 30 transfer</span></span></li>
+          <li><span class="activity-time">Equipo</span><span class="activity-text"><strong>Microspikes</strong> alquilados en el pueblo <span class="price-tag">USD 8/día</span></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Trekking Patagonia invierno">
+      </div>
+    </article>
+
+    <!-- DÍA 10 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">10<em>día</em></div>
+        <div class="day-date">Mié · 17 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>Vuelta a <em>Buenos Aires</em></h3>
+        <p>Bus matinal de regreso a El Calafate (los buses pasan por el aeropuerto), vuelo a Aeroparque y última noche porteña. Si te quedó algo pendiente — esa parrilla, ese tango — esta es tu chance.</p>
+        <ul class="activities">
+          <li><span class="activity-time">8:00</span><span class="activity-text">Bus El Chaltén → Aeropuerto FTE</span></li>
+          <li><span class="activity-time">Tarde</span><span class="activity-text">Vuelo a <strong>Aeroparque (AEP)</strong></span></li>
+          <li><span class="activity-time">Noche</span><span class="activity-text">Cena de despedida y milonga real en <strong>La Viruta</strong></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Tango Buenos Aires">
+      </div>
+    </article>
+
+    <!-- DÍA 11 -->
+    <article class="day">
+      <div class="day-marker">
+        <div class="day-num">11<em>día</em></div>
+        <div class="day-date">Jue · 18 jun</div>
+      </div>
+      <div class="day-content">
+        <h3>BUE → <em>CDMX</em></h3>
+        <p>Últimas compras (alfajores, mate, Malbec, dulce de leche), traslado a Ezeiza con 3h de margen y vuelo de regreso a casa, con la mochila llena de paisajes imposibles.</p>
+        <ul class="activities">
+          <li><span class="activity-time">Mañana</span><span class="activity-text">Compras: <strong>alfajores, mate, vino, dulce de leche</strong></span></li>
+          <li><span class="activity-time">Mediodía</span><span class="activity-text">Traslado a <strong>EZE</strong> (3h antes) <span class="price-tag">USD 25–35</span></span></li>
+        </ul>
+      </div>
+      <div class="day-image">
+        <img src="https://images.unsplash.com/photo-1598544648456-c1f0bc352a76?w=600&q=80&auto=format&fit=crop&fm=jpg" alt="Asado argentino">
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="budget" id="budget">
+  <div class="section-header">
+    <span class="section-number">— II.</span>
+    <h2>El <em>presupuesto</em>, sin sorpresas.</h2>
+    <p>Tres niveles según el estilo de viaje. Todos los precios están por persona, en dólares estadounidenses, e incluyen vuelos, hospedaje, comidas, tours y transporte interno.</p>
+  </div>
+
+  <div class="budget-grid">
+    <div class="budget-card">
+      <div class="budget-tier">Económico</div>
+      <div class="budget-amount"><em>desde</em>$2,200</div>
+      <div class="budget-details">
+        <div class="budget-detail-row"><span>Vuelos</span><span class="budget-detail">$930</span></div>
+        <div class="budget-detail-row"><span>Hospedaje</span><span class="budget-detail">$350</span></div>
+        <div class="budget-detail-row"><span>Tours</span><span class="budget-detail">$400</span></div>
+        <div class="budget-detail-row"><span>Comidas</span><span class="budget-detail">$250</span></div>
+        <div class="budget-detail-row"><span>Transporte</span><span class="budget-detail">$80</span></div>
+        <div class="budget-detail-row"><span>Otros</span><span class="budget-detail">$190</span></div>
+      </div>
+    </div>
+
+    <div class="budget-card featured">
+      <div class="budget-tier">Recomendado</div>
+      <div class="budget-amount"><em>desde</em>$3,200</div>
+      <div class="budget-details">
+        <div class="budget-detail-row"><span>Vuelos</span><span class="budget-detail">$1,180</span></div>
+        <div class="budget-detail-row"><span>Hospedaje</span><span class="budget-detail">$700</span></div>
+        <div class="budget-detail-row"><span>Tours</span><span class="budget-detail">$550</span></div>
+        <div class="budget-detail-row"><span>Comidas</span><span class="budget-detail">$400</span></div>
+        <div class="budget-detail-row"><span>Transporte</span><span class="budget-detail">$120</span></div>
+        <div class="budget-detail-row"><span>Otros</span><span class="budget-detail">$240</span></div>
+      </div>
+    </div>
+
+    <div class="budget-card">
+      <div class="budget-tier">Cómodo</div>
+      <div class="budget-amount"><em>desde</em>$4,950</div>
+      <div class="budget-details">
+        <div class="budget-detail-row"><span>Vuelos</span><span class="budget-detail">$1,500</span></div>
+        <div class="budget-detail-row"><span>Hospedaje</span><span class="budget-detail">$1,400</span></div>
+        <div class="budget-detail-row"><span>Tours</span><span class="budget-detail">$850</span></div>
+        <div class="budget-detail-row"><span>Comidas</span><span class="budget-detail">$700</span></div>
+        <div class="budget-detail-row"><span>Transporte</span><span class="budget-detail">$200</span></div>
+        <div class="budget-detail-row"><span>Otros</span><span class="budget-detail">$290</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKING -->
+<section class="packing" id="packing">
+  <div class="section-header">
+    <span class="section-number">— III.</span>
+    <h2>Qué llevar en la <em>maleta</em>.</h2>
+    <p>Junio en Patagonia es serio. El sistema de capas no es una sugerencia: es supervivencia. La ropa de algodón se moja con el sudor y puede causar hipotermia.</p>
+  </div>
+
+  <div class="packing-grid">
+    <div class="packing-col">
+      <h4>Para la <em>Patagonia</em></h4>
+      <ul class="packing-list">
+        <li>Primera capa térmica (top + leggings de merino o sintético)</li>
+        <li>Segunda capa: forro polar o suéter de lana</li>
+        <li>Chamarra impermeable y rompevientos (Gore-Tex idealmente)</li>
+        <li>Pantalón impermeable</li>
+        <li>Botas de trekking impermeables ya rodadas</li>
+        <li>Guantes (uno fino + uno grueso)</li>
+        <li>Gorro que cubra orejas + buff o cuello polar</li>
+        <li>Calcetines térmicos (3–4 pares)</li>
+        <li>Lentes de sol con protección UV</li>
+        <li>Protector solar FPS 50+ (sí, también en invierno)</li>
+        <li>Microspikes para senderos nevados (alquilables)</li>
+        <li>Mochila de día 20–30L</li>
+      </ul>
+    </div>
+    <div class="packing-col">
+      <h4>Para <em>Buenos Aires</em></h4>
+      <ul class="packing-list">
+        <li>Jeans cómodos y suéteres</li>
+        <li>Chamarra o gabardina (5–14°C en junio)</li>
+        <li>Zapatos cómodos para caminar largo</li>
+        <li>Algo más arreglado para tango y cenas</li>
+        <li>Paraguas chico (junio tiene lluvias ocasionales)</li>
+        <li>Botiquín básico (analgésicos, banditas Compeed, antialérgicos)</li>
+        <li>Adaptador eléctrico tipo C / I</li>
+        <li>Power bank</li>
+        <li>Termo (te enamorarás del mate)</li>
+        <li>Copia digital y física del pasaporte</li>
+        <li>Dólares en efectivo (billetes nuevos, sin marcas)</li>
+        <li>eSIM activada antes de salir</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="section-header">
+    <span class="section-number">— IV.</span>
+    <h2>Lo que tu agente <em>quiere que sepas</em>.</h2>
+    <p>Pequeños detalles que hacen la diferencia entre ser turista y viajar como local. Léelos antes de salir.</p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-card-icon">— Dinero</div>
+      <h4>Western Union es tu mejor amigo.</h4>
+      <p>El sistema dual argentino premia a los que pagan con tarjeta extranjera o usan WU. Olvídate de cambiar dólares en el aeropuerto: el tipo de cambio te quitará un 30% de poder adquisitivo. En El Chaltén lleva pesos contigo: hay un solo cajero y suele estar vacío.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-card-icon">— Reservas</div>
+      <h4>Anticipa lo importante.</h4>
+      <p>Don Julio se reserva con un mes. El Minitrekking en el Perito Moreno con 2–4 semanas. Hospedaje en El Chaltén también con tiempo: en invierno opera menos del 50% de lo habitual. Vuelos internos: 6–8 semanas antes.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-card-icon">— Clima</div>
+      <h4>El clima patagónico manda.</h4>
+      <p>En El Chaltén el clima cambia en minutos. Si tu día principal de trekking amanece con tormenta, no te empeñes: cambia el plan, hay alternativas. Por eso reservaste 2 noches ahí, para tener un día de margen. Salir de día y volver antes de las 17:30.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-card-icon">— Comida</div>
+      <h4>Cuándo y qué comer.</h4>
+      <p>En Argentina se cena tarde: 21:00–23:00 es lo normal. El "café americano" no existe — pide un "café largo". La carne "jugosa" es nuestro término medio. Y prueba el flan con dulce de leche y crema; vas a entender por qué los argentinos son así.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-card-icon">— Seguridad</div>
+      <h4>Buenos Aires con sentido común.</h4>
+      <p>Palermo, Recoleta y Puerto Madero son seguros incluso de noche. Evita La Boca después del atardecer (excepto en Caminito, de día). Cuidado con motochorros: no saques el celular en la calle innecesariamente. La Patagonia, en cambio, es de los lugares más seguros del continente.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-card-icon">— Cultura</div>
+      <h4>El mate es un ritual.</h4>
+      <p>Si te ofrecen mate, acepta — es un gesto de amistad. No revuelvas la bombilla con la mano, no toques mucho con los labios y devuelve el mate al cebador sin decir "gracias" hasta que ya no quieras más. Decir "gracias" significa "no quiero más".</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h3>Buen viaje, y que el <em>Fitz Roy</em><br>te reciba despejado.</h3>
+  <p>Cualquier ajuste o duda específica sobre el itinerario, estoy para ayudarte. Patagonia se respeta y se disfruta.</p>
+  <div class="footer-meta">
+    Itinerario · Argentina 2026 · 10 días entre Buenos Aires y Patagonia
+  </div>
+</footer>
+
+</body>
+</html>
